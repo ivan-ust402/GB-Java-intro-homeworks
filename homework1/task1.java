@@ -8,12 +8,21 @@ public class task1 {
         try {
             System.out.println("Введите число: ");
             int number = scan.nextInt();
-            int result = factorial(number);
-            System.out.println(result);
+            int resultSum = sum(number);
+            int resultFactorial = factorial(number);
+            System.out.printf("Вы ввели число: %d\n", number);
+            System.out.printf("Сумма чисел от 1 до %d = %d\n",number, resultSum);
+            System.out.printf("Факториал числа %d! = %d\n", number, resultFactorial);
         }
         finally {
             scan.close();
         }
+    }
+    public static int sum(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        return n + sum(n-1);
     }
     public static int factorial(int n) {
         if (n == 0 || n == 1) {
