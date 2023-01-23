@@ -23,5 +23,18 @@
 // Например:
 // 1?1+??2 = 34?
 public class task4 {
-    
+    public static void main(String[] args) {
+        // Уровень 1. Частное решение.
+        String expression = "2? + ?5 = 69";
+        String[] words = expression.split("\\D+");
+        int numArr[] = new int[words.length];
+        for (int i = 0; i < words.length; i++) {
+            numArr[i] = Integer.parseInt(words[i]);
+        }
+        int q = numArr[2] % 10 - numArr[1];
+        int w = numArr[2] / 10 - numArr[0];
+        int firstTerm = numArr[0] * 10 + q;
+        int secondTerm = numArr[1] + w * 10;
+        System.out.printf("%d + %d = %d", firstTerm, secondTerm, numArr[2]);
+    }
 }
