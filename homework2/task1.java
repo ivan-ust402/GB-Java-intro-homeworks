@@ -23,13 +23,13 @@ public class task1 {
                 .replace("}", "");
         String[] strArr = inputClear.split(",");
         for (int i = 0; i < strArr.length; i++) {
-            if (i > 0) {
-                result.append(" and");
-            }
             String[] singleValue = strArr[i].split(":");
             if (singleValue.length > 1 
                     && !singleValue[1].equals("null")) {
                 String newValue = singleValue[0] + " = " + singleValue[1];
+                if (i > 0) {
+                    result.append(" and");
+                }
                 result.append(newValue);
             }
 
