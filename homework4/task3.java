@@ -4,6 +4,7 @@ package homework4;
 import java.io.IOError;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,13 +26,49 @@ public class task3 {
         SimpleFormatter sFormat = new SimpleFormatter();
         info.setFormatter(sFormat);
         try {
-            System.out.println("Введите первое число:");
-            
+/*             System.out.println("Введите первое число:");
             int number1 = Integer.parseInt(scan.nextLine());
             System.out.println("Введите второе число:");
             int number2 = Integer.parseInt(scan.nextLine());
             System.out.println("Введите операцию(+, -, /, *): ");
             String operator = scan.nextLine();
+            if (
+                !operator.equals("+") 
+                && !operator.equals("-") 
+                && !operator.equals("/") 
+                && !operator.equals("*")
+                ) {
+                throw new Error("Вы ввели некорректный оператор!");
+            }
+            if (operator.equals("/") && number2 == 0) {
+                throw new Error("Вы ввели вторым числом ноль, а на ноль делить нельзя!");
+            } */
+            Stack<String> input = new Stack<String>();
+            System.out.println("Введите первое число:");
+            input.push(scan.nextLine());
+            System.out.println("Введите второе число:");
+            input.push(scan.nextLine());
+            while (true) {
+                System.out.println("Введите операцию(+, -, /, *): ");
+                input.push(scan.nextLine());
+                System.out.println("Вычислить/Отменить: введите Y или N");
+                String confirm = scan.nextLine();
+                System.out.println(confirm);
+                if (confirm.equals("Y") || confirm.equals("")) {
+                    break;
+                } else {
+                    input.pop();
+                    System.out.println(input.elementAt(0));
+                    System.out.println(input.elementAt(1));
+                }
+            }
+            
+            String operator = input.pop();
+            int number2 = Integer.parseInt(input.pop());
+            int number1 = Integer.parseInt(input.pop());
+            
+            
+            
             if (
                 !operator.equals("+") 
                 && !operator.equals("-") 
