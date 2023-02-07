@@ -20,9 +20,6 @@ package homework5;
 // Иван Ежов
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -56,12 +53,20 @@ public class task2 {
         employees.add("Иван Мечников");
         employees.add("Петр Петин");
         employees.add("Иван Ежов");
+        // employees.add("Федор Ежов");
 
+        // Получаем коллекцию имен без фамилий <ArrayList>(с 
+        // повторяющимися именами) onlyNames и <Set>(с неповторяющимися 
+        // именами) nameSet из всех имеющихся имен c фамилиями в коллекции 
+        // <ArrayList> employees
         for (int i = 0; i < employees.size(); i++) {
             String[] temp = employees.get(i).split(" ");
             onlyNames.add(temp[0]);
             nameSet.add(temp[0]);
         }
+
+        // Считаем сколько повторений имен из сета namSet лежит в листе 
+        // onlyNames полученные значения помещаем в <HashMap> repeatName
         for (String name : nameSet) {
             int count = 0;
             for (String eachName : onlyNames) {
@@ -71,19 +76,42 @@ public class task2 {
             }
             repeatName.put(name, count);
         }
+
+        // Выводим в консоль полученный <HashMap> repeatName
         for (String item : repeatName.keySet()) {
             System.out.println(item + " " + repeatName.get(item));
         }
         System.out.println("\nРейтинг по популярности имени: ");
+
         
         // Сортировка по популярности
         List<Map.Entry<String, Integer>> list = new ArrayList<>(repeatName.entrySet());
        
+        // Самый простой способ фильтровки
+        // list
+        //     .stream()
+        //     .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+        //     .forEach(System.out::println);
 
-        list
-            .stream()
-            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-            .forEach(System.out::println);
+        // Фильтрация с использованием алгоритма сортировка выбором
+        for (int i = 0; i < list.size(); i++) {
+            int maxValue = list.get(i).getValue();
+            int pos = i;
+            for (int j = i + 1; j < list.size(); j++) {
+                int currentValue = list.get(j).getValue();
+                if (currentValue > maxValue) {
+                    pos = j;
+                    maxValue = currentValue;
+                }
+            }
+            Map.Entry<String, Integer> temp = list.get(pos);
+            list.set(pos, list.get(i));
+            list.set(i, temp);
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
     }
    
 
