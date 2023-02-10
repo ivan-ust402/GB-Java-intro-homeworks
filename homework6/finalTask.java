@@ -63,14 +63,8 @@ public class finalTask {
                         System.out.println("9 - Цена");
                         System.out.println("0 - Выход в предыдущее меню");
                         String sInput = scan.nextLine();
-                        int secondInput;
-                        if (sInput.isEmpty() || !sInput.matches("[-+]?\\d+")){
-                            secondInput = 10;
-                        } else {
-                            secondInput = Integer.parseInt(sInput);
-                        }
-                        
-                        String filter = new String();
+                        int secondInput = checkStringforNum(sInput);
+                        String filter;
     
                         switch(secondInput) {
                             case 0: filter = "-1";
@@ -81,26 +75,26 @@ public class finalTask {
                             case 2: System.out.println("Введите цвет: ");
                                     filter = scan.nextLine();
                                     break;
-                            case 3: System.out.println("Введите кол-во ядер: ");
-                                    filter = scan.nextLine();
+                            case 3: System.out.println("Кол-во ядер");
+                                    filter = getRange(scan);
                                     break;
                             case 4: System.out.println("Введите размер RAM: ");
-                                    filter = scan.nextLine();
+                                    filter = getRange(scan);
                                     break;
                             case 5: System.out.println("Введите вид HD: ");
                                     filter = scan.nextLine();
                                     break;
                             case 6: System.out.println("Введите объем HD: ");
-                                    filter = scan.nextLine();
+                                    filter = getRange(scan);
                                     break;
                             case 7: System.out.println("Введите ОС: ");
                                     filter = scan.nextLine();
                                     break;
                             case 8: System.out.println("Введите размер диагонали: ");
-                                    filter = scan.nextLine();
+                                    filter = getDoubleRange(scan);
                                     break;
                             case 9: System.out.println("Введите цену: ");
-                                    filter = scan.nextLine();
+                                    filter = getRange(scan);
                                     break;
                             default: filter = "-2";
     
@@ -118,13 +112,7 @@ public class finalTask {
                             if (res.isEmpty()) {
                                 System.out.println("Ничего не найдено по вашему критерию!");
                             } else {
-                                for (Laptop item : res) {
-                                    System.out.println("Производитель: " + 
-                                        item.manufacturer 
-                                        + ", Модель: " + item.model
-                                        + ", Цена: " + item.price);
-                                }
-                                
+                                printLaptop(res);                                
                             }
                         }
 
@@ -152,5 +140,58 @@ public class finalTask {
             scan.close();
         }
 
+    }
+    public static int checkStringforNum(String input) {
+        if (input.isEmpty() || !input.matches("[-+]?\\d+")) {
+            return -1;
+        } else {
+            return Integer.parseInt(input);
+        }
+    }
+    public static void printLaptop(HashSet<Laptop> input) {
+        for (Laptop item : input) {
+            System.out.println("Производитель: " 
+                                + item.manufacturer 
+                                + ", Модель: " + item.model
+                                + ", Цена: " + item.price);
+        }
+    }
+    public static String getRange(Scanner sc) {
+        String result;
+        String minValue;
+        String maxValue;
+        while(true) {
+            System.out.println("Введите минимальное значение:");
+            minValue = sc.nextLine();
+            System.out.println("Введите максимальное значение:");
+            maxValue = sc.nextLine();
+            if(maxValue.matches("[-+]?\\d+") && minValue.matches("[-+]?\\d+")) {
+                result = minValue + " " + maxValue;
+                break;
+            } else {
+                System.out.println("Вы ввели невалидные значения!");
+                System.out.println("Попробуйте ввести снова");
+            } 
+        }
+        return result;
+    }
+    public static String getDoubleRange(Scanner sc) {
+        String result;
+        String minValue;
+        String maxValue;
+        while(true) {
+            System.out.println("Введите минимальное значение:");
+            minValue = sc.nextLine();
+            System.out.println("Введите максимальное значение:");
+            maxValue = sc.nextLine();
+            if(maxValue.matches("[-+]?\\d+.\\d+") && minValue.matches("[-+]?\\d+.\\d")) {
+                result = minValue + " " + maxValue;
+                break;
+            } else {
+                System.out.println("Вы ввели невалидные значения!");
+                System.out.println("Попробуйте ввести снова");
+            } 
+        }
+        return result;
     }
 }

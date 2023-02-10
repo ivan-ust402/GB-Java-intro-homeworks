@@ -79,26 +79,30 @@ public class Laptop {
                 }
             }
         } else if (key == 3) {
-            int cores;
-            if (value.isEmpty() || !value.matches("[-+]?\\d+")){
-                cores = -1;
-            } else {
-                cores = Integer.parseInt(value);
+            String[] arr = value.split(" ");
+            int min = Integer.parseInt(arr[0]);
+            int max = Integer.parseInt(arr[1]);
+            if (min > max) {
+                int temp = max;
+                max = min;
+                min = temp;
             }
             for (Laptop item : inputSet) {
-                if (item.numberOfCores == cores) {
+                if (min <= item.numberOfCores && item.numberOfCores <= max) {
                     result.add(item);
                 }
             }
         } else if (key == 4) {
-            int RAM;
-            if (value.isEmpty() || !value.matches("[-+]?\\d+")){
-                RAM = -1;
-            } else {
-                RAM = Integer.parseInt(value);
+            String[] arr = value.split(" ");
+            int min = Integer.parseInt(arr[0]);
+            int max = Integer.parseInt(arr[1]);
+            if (min > max) {
+            int temp = max;
+                max = min;
+                min = temp;
             }
             for (Laptop item : inputSet) {
-                if (item.RAM == RAM) {
+                if (min <= item.RAM && item.RAM <= max) {
                     result.add(item);
                 }
             }
@@ -109,14 +113,16 @@ public class Laptop {
                 }
             }
         } else if (key == 6) {
-            int HD;
-            if (value.isEmpty() || !value.matches("[-+]?\\d+")){
-                HD = -1;
-            } else {
-                HD = Integer.parseInt(value);
+            String[] arr = value.split(" ");
+            int min = Integer.parseInt(arr[0]);
+            int max = Integer.parseInt(arr[1]);
+            if (min > max) {
+            int temp = max;
+                max = min;
+                min = temp;
             }
             for (Laptop item : inputSet) {
-                if (item.hardDisk == HD) {
+                if (min <= item.hardDisk && item.hardDisk <= max) {
                     result.add(item);
                 }
             }
@@ -127,31 +133,50 @@ public class Laptop {
                 }
             }
         } else if (key == 8) {
-            double size;
-            if (value.isEmpty() || !value.matches("[-+]?\\d+")){
-                size = -1;
-            } else {
-                size = Double.parseDouble(value);
+            String[] arr = value.split(" ");
+            double min = Double.parseDouble(arr[0]);
+            double max = Double.parseDouble(arr[1]);
+            if (min > max) {
+            double temp = max;
+                max = min;
+                min = temp;
             }
             for (Laptop item : inputSet) {
-                if (item.size == size) {
+                if (min <= item.size && item.size <= max) {
                     result.add(item);
                 }
             }
+
         } else if (key == 9) {
-            int price;
-            if (value.isEmpty() || !value.matches("[-+]?\\d+")){
-                price = -1;
-            } else {
-                price = Integer.parseInt(value);
+            String[] arr = value.split(" ");
+            int min = Integer.parseInt(arr[0]);
+            int max = Integer.parseInt(arr[1]);
+            if (min > max) {
+            int temp = max;
+                max = min;
+                min = temp;
             }
-            
             for (Laptop item : inputSet) {
-                if (item.price == price) {
+                if (min <= item.price && item.price <= max) {
                     result.add(item);
                 }
             }
         }
         return result;
     }
+/*     public static int checkStringforNum(String input) {
+        if (input.isEmpty() || !input.matches("[-+]?\\d+")) {
+            return -1;
+        } else {
+            return Integer.parseInt(input);
+        }
+    }
+    public static double checkStringforNumDouble(String input) {
+        if (input.isEmpty() || !input.matches("[-+]?\\d+")) {
+            return -1;
+        } else {
+            return Double.parseDouble(input);
+        }
+    } */
+    
 }
